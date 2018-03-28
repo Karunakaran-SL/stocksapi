@@ -1,0 +1,41 @@
+<div class="col-md-6">
+  <h2> Stocks List</h2>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="hidden">Id</th>
+      <th>Name</th>
+      <th>Current Price</th>
+      <th>Last Update Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let stock of stocks">
+      <td class="hidden">{{stock.id}}</td>
+      <td>{{stock.name}}</td>
+      <td contenteditable="true" [textContent]="stock.currentPrice" (input)="stock.currentPrice = $event.target.textContent">{{stock.currentPrice}}</td>
+      <td>{{stock.lastUpdate}}</td>
+      <td><button class="btn btn-danger" (click)="editStock(stock)"> Edit Stock</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <div class="col-md-6">
+    <h2 class="text-center">Add Stock</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="name" [(ngModel)]="newStock.name" placeholder="Name" name="name" class="form-control" id="name">
+      </div>
+
+      <div class="form-group">
+        <label for="currentPrice">Price:</label>
+        <input [(ngModel)]="newStock.currentPrice" placeholder="Price" name="currentPrice" class="form-control" id="currentPrice">
+      </div>
+
+      <button class="btn btn-success" (click)="createStock()">Create</button>
+    </form>
+  </div>
+</div>
