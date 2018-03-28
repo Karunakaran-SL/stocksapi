@@ -1,6 +1,5 @@
 package com.test.stock.stockservice.exception;
 
-import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

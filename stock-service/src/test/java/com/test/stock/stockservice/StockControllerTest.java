@@ -49,7 +49,6 @@ public class StockControllerTest {
                 status().isOk()).andReturn();
 
         List<Stock> stocks = constructStocks(result.getResponse().getContentAsString());
-        assertEquals(3,stocks.size());
 
         //Validate the detail of one stock
 
