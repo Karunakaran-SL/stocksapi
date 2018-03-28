@@ -45,14 +45,14 @@ public class StockServiceTest {
 
     @Test(expected = StockServiceException.class)
     public void testCreateStockInvalid() throws Exception{
-        stockService.createOrUpdateStock(new Stock());
+        stockService.createStock(new Stock());
     }
 
     @Test(expected = StockServiceException.class)
     public void testCreateStockWithName() throws Exception{
         Stock stock = new Stock();
         stock.setName("IBM");
-        stockService.createOrUpdateStock(stock);
+        stockService.createStock(stock);
     }
 
     @Test
@@ -60,7 +60,38 @@ public class StockServiceTest {
         Stock stock = new Stock();
         stock.setName("IBM");
         stock.setCurrentPrice(400);
-        Stock stock1 = stockService.createOrUpdateStock(stock);
+        Stock stock1 = stockService.createStock(stock);
+        assertEquals(stock.getCurrentPrice(),400);
+        assertEquals(stock.getName(),"IBM");
+    }
+
+    @Test(expected = StockServiceException.class)
+    public void testUpdateStockInvalid() throws Exception{
+        stockService.updateStock(new Stock());
+    }
+
+    @Test(expected = StockServiceException.class)
+    public void testUpdateStockWithName() throws Exception{
+        Stock stock = new Stock();
+        stock.setName("IBM");
+        stockService.updateStock(stock);
+    }
+
+    @Test(expected = StockServiceException.class)
+    public void testUpdateStockWithNameAndCurrency() throws Exception{
+        Stock stock = new Stock();
+        stock.setName("IBM");
+        stock.setCurrentPrice(400);
+        stockService.updateStock(stock);
+    }
+
+    @Test
+    public void testUpdateStock() throws Exception{
+        Stock stock = new Stock();
+        stock.setName("IBM");
+        stock.setCurrentPrice(400);
+        stock.setId(10);
+        Stock stock1 = stockService.updateStock(stock);
         assertEquals(stock.getCurrentPrice(),400);
         assertEquals(stock.getName(),"IBM");
     }

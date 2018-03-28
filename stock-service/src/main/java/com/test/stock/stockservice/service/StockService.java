@@ -12,5 +12,7 @@ public interface StockService {
 
     Stock getStockById(int id) throws StockNotFoundException;
 
-    Stock createOrUpdateStock(Stock stock) throws StockServiceException;
+    Stock createStock(Stock stock) throws StockServiceException;
+
+    Stock updateStock(Stock stock) throws StockServiceException;
 }

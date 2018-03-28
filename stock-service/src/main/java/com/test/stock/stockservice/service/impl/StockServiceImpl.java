@@ -28,12 +28,22 @@ public class StockServiceImpl implements StockService{
     }
 
     @Override
-    public Stock createOrUpdateStock(Stock stock) throws StockServiceException {
-        isValidStock(stock);
+    public Stock createStock(Stock stock) throws StockServiceException {
+        isValidStock(stock,false);
         return stockRepository.save(stock);
     }
 
-    private boolean isValidStock(Stock stock) throws StockServiceException{
+    @Override
+    public Stock updateStock(Stock stock) throws StockServiceException {
+        isValidStock(stock,true);
+        return stockRepository.save(stock);
+    }
+
+    private boolean isValidStock(Stock stock,boolean isModify) throws StockServiceException{
+        if(isModify && stock.getId()<=0){
+            throw new StockServiceException(String.format("Stock with id : %s not found",stock.getId()));
+        }
+
         if(StringUtils.isEmpty(stock.getName())){
             throw new StockServiceException("Name not provided");
         }
