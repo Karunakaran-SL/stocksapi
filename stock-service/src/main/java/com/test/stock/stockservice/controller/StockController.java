@@ -5,10 +5,7 @@ import com.test.stock.stockservice.exception.StockServiceException;
 import com.test.stock.stockservice.model.Stock;
 import com.test.stock.stockservice.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,8 +26,13 @@ public class StockController {
     }
 
     @PutMapping("/api/stocks/{id}")
-    public Stock updateStock(Stock stock) throws StockServiceException{
-        return null;
+    public Stock updateStock(@PathVariable("id") Integer id,  @RequestBody Stock stock) throws StockServiceException{
+        return stockService.updateStock(stock);
+    }
+
+    @PostMapping("/api/stocks")
+    public Stock createStock(@RequestBody Stock stock) throws StockServiceException{
+        return stockService.createStock(stock);
     }
 
 }
