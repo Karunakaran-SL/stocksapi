@@ -58,11 +58,19 @@ public class StockServiceTest {
     @Test
     public void testCreateStock() throws Exception{
         Stock stock = new Stock();
-        stock.setName("IBM");
+        stock.setName("IBM2");
         stock.setCurrentPrice(400);
         Stock stock1 = stockService.createStock(stock);
-        assertEquals(stock.getCurrentPrice(),400);
-        assertEquals(stock.getName(),"IBM");
+        assertEquals(stock1.getCurrentPrice(),400);
+        assertEquals(stock1.getName(),"IBM2");
+    }
+
+    @Test(expected = StockServiceException.class)
+    public void testCreateStockDuplicate() throws Exception{
+        Stock stock = new Stock();
+        stock.setName("GOOL");
+        stock.setCurrentPrice(400);
+        stockService.createStock(stock);
     }
 
     @Test(expected = StockServiceException.class)

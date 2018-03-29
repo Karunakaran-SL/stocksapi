@@ -112,7 +112,7 @@ public class StockControllerTest {
     @Test
     public void testCreateStock() throws Exception{
         Stock stock = new Stock();
-        stock.setName("IBM");
+        stock.setName("IBM2");
         stock.setCurrentPrice(400);
         MvcResult result = mockMvc.perform(
                 post("/api/stocks").contentType(
@@ -120,7 +120,18 @@ public class StockControllerTest {
                 status().isOk()).andReturn();
         Stock stock1 = constructStock(result.getResponse().getContentAsString());
         assertEquals(stock.getCurrentPrice(),400);
-        assertEquals(stock.getName(),"IBM");
+        assertEquals(stock.getName(),"IBM2");
+    }
+
+    @Test
+    public void testCreateStockDuplicate() throws Exception {
+        Stock stock = new Stock();
+        stock.setName("GOOL");
+        stock.setCurrentPrice(400);
+        mockMvc.perform(
+                post("/api/stocks").contentType(
+                        MediaType.APPLICATION_JSON).content(getAsJson(stock))).andExpect(
+                status().isBadRequest());
     }
 
     @Test

@@ -32,7 +32,10 @@ export class StockComponent implements OnInit {
       .subscribe( data => {
         this.updateList();
         alert("Stock updated successfully.");
-      });
+      },err => {
+      this.updateList();
+      alert("Error while updating stock :"+err.error.message);
+    });
   }
 
   createStock() {
@@ -41,7 +44,10 @@ export class StockComponent implements OnInit {
         this.updateList();
         this.newStock = new Stock();
         alert("Stock created successfully.");
-      });
+      }, err => {
+      this.updateList();
+      alert("Error while creating stock :"+err.error.message);
+    });
   }
 }
 
